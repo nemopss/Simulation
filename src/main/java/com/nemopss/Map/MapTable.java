@@ -25,7 +25,7 @@ public class MapTable {
 
     public void displayDebugMap() {
         for (Map.Entry<Coordinates, Entity> entity: map.entrySet()) {
-            System.out.println(entity.getKey() + " Entity type=" + entity.getValue());
+            System.out.println(entity.getKey() + ", Entity type=" + entity.getValue());
         }
     }
 

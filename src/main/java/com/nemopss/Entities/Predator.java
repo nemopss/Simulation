@@ -1,9 +1,11 @@
 package com.nemopss.Entities;
 
+import com.nemopss.Map.MapTable;
+
 public class Predator extends Creature{
 
-    public Predator(int x, int y) {
-        super(x, y);
+    public Predator(int x, int y, MapTable map) {
+        super(x, y, map);
     }
 
     @Override

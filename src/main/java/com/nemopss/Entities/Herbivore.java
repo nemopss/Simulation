@@ -1,9 +1,11 @@
 package com.nemopss.Entities;
 
+import com.nemopss.Map.MapTable;
+
 public class Herbivore extends Creature{
 
-    public Herbivore(int x, int y){
-        super(x, y);
+    public Herbivore(int x, int y, MapTable map){
+        super(x, y, map);
     }
     @Override
     public void makeMove() {
