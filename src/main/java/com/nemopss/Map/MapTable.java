@@ -75,7 +75,7 @@ public class MapTable {
         for (int dy = -1; dy <= 1; dy += 2) {
             int neighborY = entity.getCoordinates().get(1) + dy;
             if (neighborY >= 0 && neighborY < mapHeight) {
-                Entity verticalNeighbor = findEntity(entity.getCoordinates().get(0), neighborY, map);
+                Entity verticalNeighbor = entityAt(Arrays.asList(entity.getCoordinates().get(0), neighborY));
                 if (verticalNeighbor != null && !isRockOrTree(verticalNeighbor)) {
                     neighbors.add(verticalNeighbor);
                 }
@@ -83,16 +83,6 @@ public class MapTable {
         }
 
         return neighbors;
-    }
-
-    // Метод для поиска сущности по координатам
-    private Entity findEntity(int x, int y, List<Entity> map) {
-        for (Entity entity : map) {
-            if (entity.getCoordinates().get(0) == x && entity.getCoordinates().get(1) == y) {
-                return entity;
-            }
-        }
-        return null;
     }
 
     public Map<Entity, List<Entity>> getMapGraph() {
