@@ -1,10 +1,12 @@
 package com.nemopss;
 
-import com.nemopss.Entities.Grass;
-import com.nemopss.Entities.Herbivore;
-import com.nemopss.Entities.Predator;
+import com.nemopss.Entities.*;
 import com.nemopss.Map.MapTable;
 import com.nemopss.Misc.Renderer;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,11 +20,16 @@ public class Main {
         map.addEntity(Petya);
         map.addEntity(Biba);
         map.addEntity(new Grass(5, 5));
+        map.addEntity(new Rock(4, 4));
+        map.addEntity(new Tree(3, 5));
        // map.removeEntity(Biba);
        // map.removeEntity(Petya);
-        map.displayDebugMap();
+       // map.displayDebugMap();
+
+        map.printMapGraph();
 
         Renderer.render(map);
+
 
     }
 

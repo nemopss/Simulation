@@ -1,7 +1,6 @@
 package com.nemopss.Map;
 
-import com.nemopss.Entities.Entity;
-import com.nemopss.Entities.Floor;
+import com.nemopss.Entities.*;
 
 import java.awt.*;
 import java.util.*;
@@ -22,9 +21,7 @@ public class MapTable {
     }
 
     public void addEntity(Entity e) {
-        if (entityAt(e.getCoordinates()) instanceof Floor) {
-            this.removeAt(e.getCoordinates());
-        }
+        this.removeAt(e.getCoordinates());
         map.add(e);
     }
 
@@ -58,8 +55,68 @@ public class MapTable {
     public List<Integer> getMapSize() {
         return mapSize;
     }
+    private List<Entity> getNeighbors(Entity entity) {
+        List<Entity> neighbors = new ArrayList<>();
+        int mapWidth = 10; // Ширина карты
+        int mapHeight = 10; // Высота карты
 
-    public void remove() {
+        // Проверяем соседей по горизонтали
+        for (int dx = -1; dx <= 1; dx += 2) {
+            int neighborX = entity.getCoordinates().get(0) + dx;
+            if (neighborX >= 0 && neighborX < mapWidth) {
+                Entity horizontalNeighbor = findEntity(neighborX, entity.getCoordinates().get(1), map);
+                if (horizontalNeighbor != null && !isRockOrTree(horizontalNeighbor)) {
+                    neighbors.add(horizontalNeighbor);
+                }
+            }
+        }
 
+        // Проверяем соседей по вертикали
+        for (int dy = -1; dy <= 1; dy += 2) {
+            int neighborY = entity.getCoordinates().get(1) + dy;
+            if (neighborY >= 0 && neighborY < mapHeight) {
+                Entity verticalNeighbor = findEntity(entity.getCoordinates().get(0), neighborY, map);
+                if (verticalNeighbor != null && !isRockOrTree(verticalNeighbor)) {
+                    neighbors.add(verticalNeighbor);
+                }
+            }
+        }
+
+        return neighbors;
+    }
+
+    // Метод для поиска сущности по координатам
+    private Entity findEntity(int x, int y, List<Entity> map) {
+        for (Entity entity : map) {
+            if (entity.getCoordinates().get(0) == x && entity.getCoordinates().get(1) == y) {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    public Map<Entity, List<Entity>> getMapGraph() {
+        Map<Entity, List<Entity>> graph = new HashMap<>();
+
+        // Создаем граф на основе соседей каждой сущности в списке
+        for (Entity entity : map) {
+            if (entity instanceof Rock || entity instanceof Tree) {
+                continue;
+            }
+            List<Entity> neighbors = getNeighbors(entity);
+            graph.put(entity, neighbors);
+        }
+
+        return graph;
+    }
+
+    public boolean isRockOrTree(Entity e) {
+        return Objects.equals(e.toString(), "\uD83E\uDEA8") || Objects.equals(e.toString(), "\uD83C\uDF33");
+    }
+
+    public void printMapGraph() {
+        for (Map.Entry<Entity, List<Entity>> entry: getMapGraph().entrySet()) {
+            System.out.println(entry);
+        }
     }
 }
