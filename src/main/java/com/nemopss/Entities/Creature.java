@@ -4,6 +4,7 @@ public abstract class Creature extends Entity {
     private int HP;
     private int speed;
 
+
     public Creature(int x, int y) {
         super(x, y);
     }

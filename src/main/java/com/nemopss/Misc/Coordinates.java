@@ -21,4 +21,15 @@ public class Coordinates {
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
+
+    public int hash() {
+        return this.x * 37 + this.y;
+    }
+
+    public boolean equals(Coordinates coordinates) {
+        if (this.x == coordinates.getX() && this.y == coordinates.getY()) {
+            return true;
+        }
+        return false;
+    }
 }
