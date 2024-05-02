@@ -64,7 +64,7 @@ public class MapTable {
         for (int dx = -1; dx <= 1; dx += 2) {
             int neighborX = entity.getCoordinates().get(0) + dx;
             if (neighborX >= 0 && neighborX < mapWidth) {
-                Entity horizontalNeighbor = findEntity(neighborX, entity.getCoordinates().get(1), map);
+                Entity horizontalNeighbor = entityAt(Arrays.asList(neighborX, entity.getCoordinates().get(1)));
                 if (horizontalNeighbor != null && !isRockOrTree(horizontalNeighbor)) {
                     neighbors.add(horizontalNeighbor);
                 }
