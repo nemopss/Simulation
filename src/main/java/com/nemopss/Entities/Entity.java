@@ -6,20 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class Entity {
-    private int x;
-    private int y;
+    private Coordinates coordinates;
 
     public Entity(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.coordinates = new Coordinates(x, y);
     }
 
     public Coordinates getCoordinates() {
-        return new Coordinates(x, y);
+        return coordinates;
     }
 
     public void setCoordinates(Coordinates coordinates) {
-        this.x = coordinates.getX();
-        this.y = coordinates.getY();
+        this.coordinates = coordinates;
     }
 }
