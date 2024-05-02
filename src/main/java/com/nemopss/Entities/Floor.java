@@ -1,6 +1,5 @@
 package com.nemopss.Entities;
 
-import com.nemopss.Map.MapTable;
 
 public class Floor extends Entity {
 
@@ -11,5 +10,6 @@ public class Floor extends Entity {
     @Override
     public String toString() {
         return "\uD83D\uDFEB";
+        //return this.getCoordinates().toString();
     }
 }
