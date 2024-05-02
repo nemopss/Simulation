@@ -1,4 +1,7 @@
 package com.nemopss.Entities;
 
-public class Resourse extends Entity{
+public class Resourse extends Entity {
+    public Resourse(int x, int y) {
+        super(x, y);
+    }
 }
