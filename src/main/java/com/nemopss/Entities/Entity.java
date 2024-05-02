@@ -1,29 +1,26 @@
 package com.nemopss.Entities;
 
 import com.nemopss.Map.MapTable;
-import com.nemopss.Misc.Coordinates;
 
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class Entity {
-    private Coordinates coordinates;
-    private MapTable map;
+    private int x;
+    private int y;
 
-    public Entity(int x, int y, MapTable map) {
-        this.coordinates = new Coordinates(x, y);
-        this.map = map;
+    public Entity(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public List<Integer> getCoordinates() {
+        return Arrays.asList(x, y);
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(List<Integer> coordinates) {
+        this.x = coordinates.get(0);
+        this.y = coordinates.get(1);
     }
 
-    public MapTable getMap() {
-        return map;
-    }
 }

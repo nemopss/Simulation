@@ -4,8 +4,8 @@ import com.nemopss.Map.MapTable;
 
 public class Herbivore extends Creature{
 
-    public Herbivore(int x, int y, MapTable map){
-        super(x, y, map);
+    public Herbivore(int x, int y){
+        super(x, y);
     }
     @Override
     public void makeMove() {

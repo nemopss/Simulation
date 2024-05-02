@@ -1,57 +1,65 @@
 package com.nemopss.Map;
 
 import com.nemopss.Entities.Entity;
-import com.nemopss.Misc.Coordinates;
+import com.nemopss.Entities.Floor;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class MapTable {
-    private Map<Coordinates, Entity> map;
-    private Coordinates mapSize;
+    private List<Entity> map;
+    private List<Integer> mapSize;
 
     public MapTable() {
-        map = new HashMap<>();
-        mapSize = new Coordinates(10, 10);
+        map = new ArrayList<>();
+        mapSize = Arrays.asList(10, 10);
+        for (int i = 0; i < mapSize.get(0); i++) {
+            for (int j = 0; j < mapSize.get(1); j++) {
+                map.add(new Floor(j, i));
+            }
+        }
     }
 
-    public void addEntity( Entity e, Coordinates coordinates) {
-        e.setCoordinates(coordinates);
-        map.put(coordinates, e);
+    public void addEntity(Entity e) {
+        if (entityAt(e.getCoordinates()) instanceof Floor) {
+            this.removeAt(e.getCoordinates());
+        }
+        map.add(e);
     }
 
-    public void deleteEntity(Entity e) {
-        map.remove(e.getCoordinates());
+    public void removeAt(List<Integer> coordinates) {
+        map.removeIf(e -> e.getCoordinates().equals(coordinates));
+    }
+    public void removeEntity(Entity e) {
+        map.remove(e);
+        map.add(new Floor(e.getCoordinates().get(0), e.getCoordinates().get(1)));
     }
 
     public void displayDebugMap() {
-        for (Map.Entry<Coordinates, Entity> entity: map.entrySet()) {
-            System.out.println(entity.getKey() + ", Entity type=" + entity.getValue());
+        for (Entity entity: map) {
+            System.out.println(entity.getCoordinates() + ", Entity type=" + entity);
         }
     }
 
-    public Map<Coordinates, Entity> getMap() {
+    public List<Entity> getMap() {
         return map;
     }
 
-
-    public List<Integer> getListOfCoordinatesInHash() {
-        List<Integer> hashes = new ArrayList<>();
-        for (Map.Entry<Coordinates, Entity> entry: map.entrySet()) {
-            hashes.add(entry.getKey().hash());
-        }
-        return hashes;
-    }
-
-    public Entity entityAt(Coordinates coordinates) {
-        for (Map.Entry<Coordinates, Entity> entry: map.entrySet()) {
-            if (entry.getKey().equals(coordinates)) {
-                return entry.getValue();
+    public Entity entityAt(List<Integer> coordinates) {
+        for (Entity entity: map) {
+            if (entity.getCoordinates().equals(coordinates)) {
+                return entity;
             }
         }
         return null;
     }
 
-    public Coordinates getMapSize() {
+    public List<Integer> getMapSize() {
         return mapSize;
+    }
+
+    public void remove() {
+
     }
 }
