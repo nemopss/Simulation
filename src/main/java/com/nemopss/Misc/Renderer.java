@@ -11,7 +11,7 @@ public class Renderer {
             for (int j = 0; j < map.getMapSize().get(1); j++) {
                 List<Integer> coordinates = Arrays.asList(j, i);
                 if (map.entityAt(coordinates) != null) {
-                    System.out.print(map.entityAt(coordinates).toString() + " ");
+                    System.out.print(map.entityAt(coordinates).toString() + "");
                 } else {
                     System.out.print("⬛ ");
                 }
