@@ -20,6 +20,15 @@ public class MapTable {
     }
 
     public void moveTo(Entity e, List<Integer> coordinates) {
+        if (entityAt(coordinates) instanceof Herbivore && e instanceof Herbivore) {
+            return;
+        }
+        if (entityAt(coordinates) instanceof Predator && e instanceof Predator) {
+            return;
+        }
+        if (entityAt(coordinates) instanceof Predator && e instanceof Herbivore) {
+            return;
+        }
         addEntity(new Floor(e.getCoordinates().get(0), e.getCoordinates().get(1)));
         e.setCoordinates(coordinates);
         addEntity(e);
@@ -33,16 +42,16 @@ public class MapTable {
     public void removeAt(List<Integer> coordinates) {
         map.removeIf(e -> e.getCoordinates().equals(coordinates));
     }
-    public void removeEntity(Entity e) {
+    /*public void removeEntity(Entity e) {
         map.remove(e);
         map.add(new Floor(e.getCoordinates().get(0), e.getCoordinates().get(1)));
-    }
+    }*/
 
-    public void displayDebugMap() {
+    /*public void displayDebugMap() {
         for (Entity entity: map) {
             System.out.println(entity.getCoordinates() + ", Entity type=" + entity);
         }
-    }
+    }*/
 
     public List<Entity> getMap() {
         return map;
@@ -93,7 +102,6 @@ public class MapTable {
     public Map<Entity, List<Entity>> getMapGraph() {
         Map<Entity, List<Entity>> graph = new HashMap<>();
 
-        // Создаем граф на основе соседей каждой сущности в списке
         for (Entity entity : map) {
             if (entity instanceof Rock || entity instanceof Tree) {
                 continue;
@@ -109,11 +117,11 @@ public class MapTable {
         return Objects.equals(e.toString(), "\uD83E\uDEA8") || Objects.equals(e.toString(), "\uD83C\uDF33");
     }
 
-    public void printMapGraph() {
+    /*public void printMapGraph() {
         for (Map.Entry<Entity, List<Entity>> entry: getMapGraph().entrySet()) {
             System.out.println(entry);
         }
-    }
+    }*/
 
     public int getWidth(){
         return this.mapSize.get(0);
@@ -123,7 +131,7 @@ public class MapTable {
         return this.mapSize.get(1);
     }
 
-    public Herbivore getHerbivore() {
+/*    public Herbivore getHerbivore() {
         for (Entity entity: map) {
             if (entity instanceof Herbivore) {
                 return (Herbivore) entity;
@@ -139,5 +147,5 @@ public class MapTable {
             }
         }
         return null;
-    }
+    }*/
 }
