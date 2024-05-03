@@ -9,7 +9,8 @@ public class Floor extends Entity {
 
     @Override
     public String toString() {
-        return "\uD83D\uDFEB";
+        //return "\uD83D\uDFEB";
         //return this.getCoordinates().toString();
+        return "✖\uFE0F";
     }
 }

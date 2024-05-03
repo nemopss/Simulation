@@ -18,6 +18,7 @@ public class Renderer {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void renderWithHighlightedPath(MapTable map, List<List<Integer>> path) {
