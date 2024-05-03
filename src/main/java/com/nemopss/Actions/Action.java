@@ -1,4 +1,4 @@
 package com.nemopss.Actions;
 
-public class Action {
+public abstract class Action {
 }

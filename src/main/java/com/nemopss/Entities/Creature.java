@@ -1,17 +1,22 @@
 package com.nemopss.Entities;
 
+import com.nemopss.Map.MapTable;
+
 import java.util.*;
 
 public abstract class Creature extends Entity {
-    private int HP;
-    private int speed;
+    protected int speed;
 
 
     public Creature(int x, int y) {
         super(x, y);
     }
 
-    public abstract void makeMove();
+    public Creature() {
+    }
+
+    public abstract void makeMove(MapTable map);
+
     public List<List<Integer>> findFood(Map<Entity, List<Entity>> graph) {
         Queue<Entity> queue = new LinkedList<>();
         Map<Entity, Entity> prev = new HashMap<>();
@@ -22,7 +27,7 @@ public abstract class Creature extends Entity {
             if (this instanceof Herbivore && current instanceof Grass) {
                 return reconstructPath(prev, this, current);
             }
-            if (this instanceof Predator  && current instanceof Herbivore) {
+            if (this instanceof Predator && current instanceof Herbivore) {
                 return reconstructPath(prev, this, current);
             }
 
@@ -54,6 +59,7 @@ public abstract class Creature extends Entity {
         startCoordinates.add(0, start.getCoordinates().get(0));
         startCoordinates.add(1, start.getCoordinates().get(1));
         path.add(0, startCoordinates);
+        path.remove(0);
         return path;
     }
 }

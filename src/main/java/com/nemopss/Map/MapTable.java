@@ -2,7 +2,6 @@ package com.nemopss.Map;
 
 import com.nemopss.Entities.*;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -12,12 +11,18 @@ public class MapTable {
 
     public MapTable() {
         map = new ArrayList<>();
-        mapSize = Arrays.asList(10, 10);
+        mapSize = Arrays.asList(20, 20);
         for (int i = 0; i < mapSize.get(0); i++) {
             for (int j = 0; j < mapSize.get(1); j++) {
                 map.add(new Floor(j, i));
             }
         }
+    }
+
+    public void moveTo(Entity e, List<Integer> coordinates) {
+        addEntity(new Floor(e.getCoordinates().get(0), e.getCoordinates().get(1)));
+        e.setCoordinates(coordinates);
+        addEntity(e);
     }
 
     public void addEntity(Entity e) {
@@ -57,8 +62,8 @@ public class MapTable {
     }
     private List<Entity> getNeighbors(Entity entity) {
         List<Entity> neighbors = new ArrayList<>();
-        int mapWidth = 10; // Ширина карты
-        int mapHeight = 10; // Высота карты
+        int mapWidth = this.getWidth(); // Ширина карты
+        int mapHeight = this.getHeigth(); // Высота карты
 
         // Проверяем соседей по горизонтали
         for (int dx = -1; dx <= 1; dx += 2) {
@@ -108,5 +113,31 @@ public class MapTable {
         for (Map.Entry<Entity, List<Entity>> entry: getMapGraph().entrySet()) {
             System.out.println(entry);
         }
+    }
+
+    public int getWidth(){
+        return this.mapSize.get(0);
+    }
+
+    public int getHeigth(){
+        return this.mapSize.get(1);
+    }
+
+    public Herbivore getHerbivore() {
+        for (Entity entity: map) {
+            if (entity instanceof Herbivore) {
+                return (Herbivore) entity;
+            }
+        }
+        return null;
+    }
+
+    public Predator getPredator() {
+        for (Entity entity: map) {
+            if (entity instanceof Predator) {
+                return (Predator) entity;
+            }
+        }
+        return null;
     }
 }

@@ -1,10 +1,12 @@
 package com.nemopss.Entities;
 
-import com.nemopss.Map.MapTable;
-
-public class Grass extends Resourse{
+public class Grass extends Resourse {
     public Grass(int x, int y) {
         super(x, y);
+    }
+
+    public Grass() {
+
     }
 
     @Override

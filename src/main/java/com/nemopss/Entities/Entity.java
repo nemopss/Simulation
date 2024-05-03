@@ -1,7 +1,5 @@
 package com.nemopss.Entities;
 
-import com.nemopss.Map.MapTable;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +10,10 @@ public abstract class Entity {
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Entity() {
+
     }
 
     public List<Integer> getCoordinates() {
