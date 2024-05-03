@@ -11,6 +11,6 @@ public class Floor extends Entity {
     public String toString() {
         //return "\uD83D\uDFEB";
         //return this.getCoordinates().toString();
-        return "✖\uFE0F";
+        return "\uD83D\uDFEB";
     }
 }
